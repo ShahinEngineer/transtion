@@ -9,7 +9,6 @@ export interface Transaction{
      transferValue:Number;
      descisition:String;
      userId:String;
-
 }
 export function TransactionValidation(data:object):Joi.ValidationResult {
     const schema = Joi.object({ 

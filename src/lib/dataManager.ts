@@ -5,7 +5,7 @@ import {exchangeRates,threshold} from '../data/index';
 export interface IDataManager{
     addTransaction(transaction:Transaction):Promise<void>
     getAllTransactionByUserId(userId:string):Promise<Transaction[]>
-    transferTransaction(currency:string,countryCode:string,value:number):object
+    transferTransaction(currency:string,countryCode:string,value:number):{decision:string,transferValue:number}
 }
 export class DataManager implements IDataManager{   
     protected connection:any;
@@ -21,7 +21,7 @@ export class DataManager implements IDataManager{
         await this.init()
         return await this.connection.find({userId}).sort({date: 'desc'})
     }
-    public transferTransaction(currency:string,countryCode:string,value:number):object | Error{
+    public transferTransaction(currency:string,countryCode:string,value:number):{decision:string,transferValue:number} {
         let transferValue = 0;
         let decision = "";
         if(exchangeRates[currency]){

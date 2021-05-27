@@ -14,6 +14,9 @@ export class App{
     this.middlewares(appInit.middleWares)
     this.routes(appInit.controllers)
   }
+  public getServer(){
+    return this.app;
+  }
   private middlewares(middleWares: { forEach: (arg0: (middleWare: any) => void) => void; }){
     middleWares.forEach(middleWares=>{
       this.app.use(middleWares)

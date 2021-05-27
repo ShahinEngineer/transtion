@@ -15,37 +15,37 @@ export class HomeController implements IControllerBase{
         this.userDataManager=new userDataManager();
     }
     initRouter(){
-        this.router.get('/transcationByEmail/:email', this.index)
-        this.router.post('/transcation',this.addTransaction)
+        this.router.get('/transcations', this.index)
+        this.router.post('/transcations',this.addTransaction)
     }
     index = async (req: Request, res: Response) => {
-        const {email} = req.params;
+        const email = req.query.email || "";
         const {error} = TransactionEmailValidation({email});
         if(error){
-            res.status(400).send({message:error.details[0].message})
+            res.status(400).json({message:error.details[0].message})
         }
         try {
-            const resultFindUser = await this.userDataManager.findByEmail(email)
+            const resultFindUser = await this.userDataManager.findByEmail(email?.toString())
             const transactionResult = await this.dataManager.getAllTransactionByUserId(resultFindUser._id)
-            return res.status(200).send({result:transactionResult})
+            return res.status(200).json({result:transactionResult})
         } catch(error){
-            return res.status(402).send({message:error})
+            return res.status(402).json({message:error})
         }
     }
     addTransaction = async (req: Request, res: Response) => {
         const data = req.body
         const {error} = TransactionValidation(data);
         if(error){
-            res.status(400).send({message:error.details[0].message})
+           return res.status(400).json({message:error.details[0].message})
         }
         const {currency,value,countryCode,userId} = data;
         try {
             await this.userDataManager.findUser(userId)
-            const result = this.dataManager.transferTransaction(currency,countryCode,value)
+            const result= this.dataManager.transferTransaction(currency,countryCode,value)
             await this.dataManager.addTransaction({...data,OrginValue:data.value,...result})
-            return res.status(200).send({success:true})
+            return res.status(200).json({decision:result.decision})
         } catch(error){
-            return res.status(402).send({message:error})
+            return res.status(402).json({message:error})
         }
     }
     
