@@ -1,0 +1,117 @@
+{
+	"info": {
+		"_postman_id": "1e7cb6a4-9f38-4bb6-b07e-9e91b333b507",
+		"name": "transactions",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
+	},
+	"item": [
+		{
+			"name": "transaction",
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n    \"currency\":\"EUR\",\r\n    \"value\":40,\r\n    \"countryCode\":\"DE\",\r\n    \"userId\":\"60ae36d942b6014a0800cda8\"\r\n}\r\n",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "http://localhost:5000/transcations",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "5000",
+					"path": [
+						"transcations"
+					],
+					"query": [
+						{
+							"key": "url",
+							"value": "shaheen",
+							"disabled": true
+						}
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "transaction",
+			"protocolProfileBehavior": {
+				"disableBodyPruning": true
+			},
+			"request": {
+				"method": "GET",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n    \"currency\":\"EUR\",\r\n    \"value\":40,\r\n    \"countryCode\":\"FR\",\r\n    \"userId\":\"60ae36d942b6014a0800cda8\"\r\n}\r\n",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "http://localhost:5000/transcationByEmail",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "5000",
+					"path": [
+						"transcationByEmail"
+					],
+					"query": [
+						{
+							"key": "url",
+							"value": "shaheen",
+							"disabled": true
+						}
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "addUser",
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n\"email\":\"moabo.shahin\",\r\n\"firstName\":\"mohammad\",\r\n\"lastName\":\"shahin\"\r\n}\r\n",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "http://localhost:5000/user",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "5000",
+					"path": [
+						"user"
+					],
+					"query": [
+						{
+							"key": "url",
+							"value": "shaheen",
+							"disabled": true
+						}
+					]
+				}
+			},
+			"response": []
+		}
+	]
+}

@@ -23,11 +23,11 @@ export class UserController implements IControllerBase{
            return res.status(400).json({message:error.details[0].message})
         }
         try{
-            await this.userDataManager.addUser({...data})
+           const result = await this.userDataManager.addUser({...data})
+           return res.status(200).json({success:true,result})
         }catch(error){
            return res.status(401).json({message:error.message})
         }
-        return res.status(200).json({success:true})
     }
 
 }
