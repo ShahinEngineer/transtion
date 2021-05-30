@@ -12,22 +12,22 @@ export class DBConnection {
         pass: config.DB.PASSWORD
       };
     public static async getCollection(name:string,Schema:any){
-        if(!this.connection || !this.connectMong.readyState){
+        
+        if(!DBConnection.connection || !DBConnection.connectMong.readyState){
             await this.connect();
         }
         const model = await mongoose.model(name, Schema);
         return model;
     }
     public static async connect(){
-        this.connection =  await mongoose.connect(config.DB.URI, this.dbOptions)
-        .then(() => console.log('Connected to MongoDB...'))
-        .catch(err => console.error('Could not connect to MongoDB...'));
+        DBConnection.connection =  await mongoose.connect(config.DB.URI, this.dbOptions)
        
-        this.connectMong.on('error',err=>{
+        DBConnection.connectMong.on('error',err=>{
             console.log(err)
         })
-        this.connectMong.once('open',()=>{
+        DBConnection.connectMong.once('open',()=>{
             console.log("Mongodb connection stablish")
         })
+
     }
 }
